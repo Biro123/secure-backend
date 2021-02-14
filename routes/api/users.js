@@ -7,12 +7,28 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
+const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 
 // @route   GET api/users
 // @desc    Test route
 // @access  Public
 router.get('/', (req, res) => res.send('User route'));
+
+// @route   GET api/users/me
+// @desc    Get user id for current logged-in user
+// @access  Private
+router.get('/me', auth, async (req, res) => {
+  try {
+    // find the user in the database with the id from the token
+    // as decoded in auth middleware. Exclude password from db read
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route   POST api/users
 // @desc    Register User
@@ -58,8 +74,6 @@ router.post('/', [
 
     // Write record to db
     await user.save();
-
-    console.log(user);
 
     // Return jsonwebtoken to automatically log in newly-registered user
     const payload = {

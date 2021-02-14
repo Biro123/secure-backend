@@ -4,6 +4,8 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 const User = require('../../models/User');
 
@@ -57,9 +59,24 @@ router.post('/', [
     // Write record to db
     await user.save();
 
-    // return jsonwebtoken (so user is logged in)
+    console.log(user);
 
-    res.send('User registered');
+    // Return jsonwebtoken to automatically log in newly-registered user
+    const payload = {
+      user: {
+        id: user.id
+      }
+    };
+
+    jwt.sign(
+      payload,
+      config.get('jwtSecret'),
+      { expiresIn: 360000 }, // Totdo prod should be 3600
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
 
   } catch(err) {
     console.error(err.message);

@@ -11,9 +11,19 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 
 // @route   GET api/users
-// @desc    Test route
+// @desc    Return list of users
 // @access  Public
-router.get('/', (req, res) => res.send('User route'));
+router.get('/', async (req, res) => {
+  try {
+    // find the user in the database with the id from the token
+    // as decoded in auth middleware. Exclude password from db read
+    const user = await User.find().select('-password -email');
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route   GET api/users/me
 // @desc    Get user id for current logged-in user
@@ -97,7 +107,21 @@ router.post('/', [
     res.status(500).send('Server Error')
   }
 
+});
 
+// @route   DELETE api/users/me
+// @desc    Delete logged-in user
+// @access  Private
+router.delete('/me', auth, async (req, res) => {
+  try {
+    // Remove user
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports = router;

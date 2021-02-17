@@ -1,10 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import 'fontsource-roboto';
 import AppNavBar from './components/appNavBar/AppNavBar';
 import MainPage from './components/mainPage/MainPage';
-
 
 const App = () => {
   return (
@@ -13,12 +11,9 @@ const App = () => {
         <AppNavBar />
         <Switch>
           <Route exact path='/' component={MainPage} />
-          {/* <Route exact path='/register' component={Register} />
-          <Route exact path='/login' component={Login} /> */}
+          {/* <Route exact path='/register' component={Register} /> */}
+          <Route exact path='/login' component={() => <p>login</p>} />
         </Switch>
-        {/* <Button variant="contained" color="primary">
-          Hello World
-        </Button> */}
       </Router>      
     </div>
   );

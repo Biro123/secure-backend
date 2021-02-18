@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { useState } from '@hookstate/core';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -34,7 +35,7 @@ export default function AppNavBar() {
   const classes = useStyles();
 
   const userState = useUserState();
-  console.log(userState.isLoggedIn);
+  // console.log(userState.isLoggedIn);
 
   return (
     <Fragment>
@@ -52,8 +53,9 @@ export default function AppNavBar() {
             Title
           </Typography>
           <Button variant="contained" color="secondary" 
-            onClick={() => userState.toggleLoggedIn()}
-            // to={userState.isLoggedIn ? '/logout' : '/login'} 
+            // onClick={() => userState.toggleLoggedIn()}
+            component={RouterLink}
+            to={userState.isLoggedIn ? '/logout' : '/login'} 
           >
             {userState.isLoggedIn ? 'Sign-out' : 'Sign-in'}
           </Button>

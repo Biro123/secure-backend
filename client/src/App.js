@@ -5,12 +5,14 @@ import AppNavBar from './components/appNavBar/AppNavBar';
 import MainPage from './components/mainPage/MainPage';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
+import AlertMessage from './components/alert/AlertMessage';
 
 const App = () => {
   return (
     <div className="App">
       <Router>
         <AppNavBar />
+        <AlertMessage />
         <Switch>
           <Route exact path='/' component={MainPage} />
           <Route exact path='/register' component={SignUp} />

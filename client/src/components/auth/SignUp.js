@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { useUserState } from '../../globalState/userState';
+import { useAlertState } from '../../globalState/alertState';
+// import { register } from '../../actions/auth';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,7 +41,7 @@ export default function SignUp() {
   const classes = useStyles();
 
   const userState = useUserState();
-  console.log(userState.isLoggedIn);
+  const alertState = useAlertState();
 
   const formData = useState({
     name: '',
@@ -52,15 +54,14 @@ export default function SignUp() {
 
   const onChange = (e) =>
     formData[e.target.name].set(e.target.value);
-    // setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-    // if (password !== password2) {
-    //   setAlert('Passwords do not match', 'danger');
-    // } else {
-      // register({ name, email, password });
-    // }
+    e.preventDefault();    
+    if (password !== password2) {
+      alertState.setAlert('Passwords do not match', 'danger');
+    } else {
+      userState.register({ name, email, password });
+    }
   };
 
   return (

@@ -1,12 +1,17 @@
 import { createState, useState } from '@hookstate/core';
+import axios from 'axios';
+import { alertState, useAlertState } from './alertState';
 
 const userState = createState({
-    isLoggedIn: false,
-    userDetails: null
+    token: localStorage.getItem('token'),
+    isAuthenticated: null,
+    loading: true,
+    user: null    
 })
 
 export function useUserState() {
     const state = useState(userState)
+    const alertState = useAlertState();
 
     // This function wraps the state by an interface,
     // i.e. the state link is not accessible directly outside of this module.
@@ -16,23 +21,40 @@ export function useUserState() {
     // to choose the best option. If unsure, exposing the state directly
     // like it is done in the TasksState.ts is a safe bet.        
     return ({
-        get isLoggedIn() {
-            return state.isLoggedIn.get()
+        get isAuthenticated() {
+          return state.isAuthenticated.get()
         },
-        setLoggedIn() {
-            state.isLoggedIn.set(true)
+        async register({ name, email, password }) {
+          const config = {
+            headers: { 'Content-Type': 'application/json' }
+          };
+        
+          const body = JSON.stringify({ name, email, password });
+        
+          try {
+            const res = await axios.post('/api/users', body, config);
+            userState.setAuthenticationSuccess(res.data);
+            // localStorage.setItem('token', res.data.token);
+            state.token.set(res.data.token)
+            state.isAuthenticated.set(true);
+            state.isLoading.set(false);   
+          } catch (err) {
+            const errors = err.response.data.errors;
+            if (errors) {
+              errors.forEach(error => alertState.setAlert(error.msg, 'danger'));
+              // errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+            }
+            localStorage.removeItem('token');
+            state.token.set(null)
+            state.isAuthenticated.set(false);
+            state.isLoading.set(false);
+          }
         },
-        setLoggedOut() {
-          state.isLoggedIn.set(false)
+        get user() {
+            return state.user.get()
         },
-        toggleLoggedIn() {
-          state.isLoggedIn.set(p => !p)
-        },
-        get userDetails() {
-            return state.userDetails.get()
-        },
-        setUserDetails(user) {
-            state.userDetails.set(user)
+        setUser(user) {
+            state.user.set(user)
         },
         get() {
             return state.get()

@@ -1,3 +1,4 @@
+import { useState } from '@hookstate/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,18 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { useUserState } from '../../globalState/userState';
+import { useAlertState } from '../../globalState/alertState';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,6 +39,24 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const userState = useUserState();
+  const alertState = useAlertState();
+
+  const formData = useState({
+    email: '',
+    password: '',
+  });
+
+  const { email, password } = formData.get();
+
+  const onChange = (e) =>
+    formData[e.target.name].set(e.target.value);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();    
+    userState.signIn({ email, password });
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -58,7 +67,8 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate 
+           onSubmit={(e) => onSubmit(e)}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -69,6 +79,8 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e) => onChange(e)}
           />
           <TextField
             variant="outlined"
@@ -80,11 +92,9 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => onChange(e)}
           />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <Button
             type="submit"
             fullWidth
@@ -108,9 +118,6 @@ export default function SignIn() {
           </Grid>
         </form>
       </div>
-      {/* <Box mt={8}>
-        <Copyright />
-      </Box> */}
     </Container>
   );
 }

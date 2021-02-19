@@ -33,8 +33,8 @@ export function useUserState() {
         
           try {
             const res = await axios.post('/api/users', body, config);
-            userState.setAuthenticationSuccess(res.data);
-            // localStorage.setItem('token', res.data.token);
+            // userState.setAuthenticationSuccess(res.data);
+            localStorage.setItem('token', res.data.token);
             state.token.set(res.data.token)
             state.isAuthenticated.set(true);
             state.isLoading.set(false);   
@@ -49,6 +49,56 @@ export function useUserState() {
             state.isAuthenticated.set(false);
             state.isLoading.set(false);
           }
+        },
+        async signIn({ email, password }) {
+          const config = {
+            headers: { 'Content-Type': 'application/json' }
+          };
+        
+          const body = JSON.stringify({ email, password });
+        
+          try {
+            const res = await axios.post('/api/auth', body, config);
+            // userState.setAuthenticationSuccess(res.data);
+            localStorage.setItem('token', res.data.token);
+            state.token.set(res.data.token)
+            state.isAuthenticated.set(true);
+            state.isLoading.set(false);   
+          } catch (err) {
+            console.log(err);
+            const errors = err.response.data.errors;
+            if (errors) {
+              errors.forEach(error => alertState.setAlert(error.msg, 'danger'));
+              // errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+            }
+            localStorage.removeItem('token');
+            state.token.set(null)
+            state.isAuthenticated.set(false);
+            state.isLoading.set(false);
+          }
+        },
+        async loadUser() {
+          try {
+            const res = await axios.get('/api/auth');
+            state.isAuthenticated.set(true);
+            state.isLoading.set(false);   
+          } catch (err) {
+            console.log(err);
+            localStorage.removeItem('token');
+            state.token.set(null)
+            state.isAuthenticated.set(false);
+            state.isLoading.set(false);
+          }
+        },
+        signOut() {
+          localStorage.removeItem('token');
+          state.token.set(null);
+          state.isAuthenticated.set(false);
+          state.isLoading.set(false);
+          state.user.set(null);
+        },
+        get token() {
+          return state.token.get()
         },
         get user() {
             return state.user.get()

@@ -37,6 +37,19 @@ export default function AppNavBar() {
   const userState = useUserState();
   // console.log(userState.isLoggedIn);
 
+  const button = userState.isAuthenticated ? 
+  (
+    <Button variant="contained" color="secondary" onClick={() => userState.signOut()}>
+      Sign Out
+    </Button>
+  ) : (
+    <Button variant="contained" color="secondary" 
+      component={RouterLink}
+      to='/login'>
+      Sign In
+    </Button>
+  )
+
   return (
     <Fragment>
       <AppBar>
@@ -52,13 +65,7 @@ export default function AppNavBar() {
           <Typography variant="h6" className={classes.title}>
             Title
           </Typography>
-          <Button variant="contained" color="secondary" 
-            // onClick={() => userState.toggleLoggedIn()}
-            component={RouterLink}
-            to={userState.isLoggedIn ? '/logout' : '/login'} 
-          >
-            {userState.isLoggedIn ? 'Sign-out' : 'Sign-in'}
-          </Button>
+          {button}
         </Toolbar>
       </AppBar>
       <Toolbar />

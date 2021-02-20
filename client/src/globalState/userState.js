@@ -41,7 +41,7 @@ export function useUserState() {
           } catch (err) {
             const errors = err.response.data.errors;
             if (errors) {
-              errors.forEach(error => alertState.setAlert(error.msg, 'danger'));
+              errors.forEach(error => alertState.setAlert(error.msg, 'error'));
               // errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
             }
             localStorage.removeItem('token');
@@ -68,7 +68,7 @@ export function useUserState() {
             console.log(err);
             const errors = err.response.data.errors;
             if (errors) {
-              errors.forEach(error => alertState.setAlert(error.msg, 'danger'));
+              errors.forEach(error => alertState.setAlert(error.msg, 'error'));
               // errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
             }
             localStorage.removeItem('token');

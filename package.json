@@ -12,6 +12,7 @@
   "author": "Brian Robson",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.3",
     "express": "^4.17.1",

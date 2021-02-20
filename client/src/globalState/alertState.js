@@ -8,6 +8,7 @@ export function useAlertState() {
 
     return ({
         setAlert(msg, alertType, timeout = 5000) {
+          // alertType must be error, warning, info, success
           const id = uuid()
           state.merge([{ msg, alertType, id }]);
           setTimeout(() => state.set(

@@ -10,6 +10,7 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import AlertMessage from './components/alert/AlertMessage';
 import { userUserState, useUserState } from './globalState/userState';
+import ThemeProvider from './ThemeProvider';
 
 const App = () => {
 
@@ -40,15 +41,18 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <CssBaseline />
-        <AppNavBar />
-        <AlertMessage />
-        <Switch>
-          <Route exact path='/' component={MainPage} />
-          <Route exact path='/register' component={SignUp} />
-          <Route exact path='/login' component={SignIn} />
-          <Route exact path='/logout' component={() => <p>logout</p>} />
-        </Switch>
+        <ThemeProvider>
+          <CssBaseline />
+          <AppNavBar />
+          <AlertMessage />
+          <Switch>
+            <Route exact path='/' component={MainPage} />
+            <Route exact path='/register' component={SignUp} />
+            <Route exact path='/login' component={SignIn} />
+            <Route exact path='/logout' component={() => <p>logout</p>} />
+          </Switch>          
+        </ThemeProvider>
+        
       </Router>      
     </div>
   );

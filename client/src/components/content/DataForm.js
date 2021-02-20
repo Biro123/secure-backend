@@ -80,35 +80,29 @@ export default function DataForm() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <form className={classes.form} noValidate  onSubmit={(e) => onSubmit(e)}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                name="text"
-                variant="outlined"
-                required
-                fullWidth
-                id="text"
-                label="Enter Text"
-                autoFocus
-                value={text}
-                onChange={(e) => onChange(e)}
-              />
-            </Grid>            
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Add
-          </Button>          
-        </form>
-      </div>
-    </Container>
+    <div className={classes.paper}>
+      <form className={classes.form} noValidate  onSubmit={(e) => onSubmit(e)}>
+        <TextField
+          name="text"
+          variant="outlined"
+          required
+          fullWidth
+          id="text"
+          label="Enter Text"
+          autoFocus
+          value={text}
+          onChange={(e) => onChange(e)}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Add
+        </Button>          
+      </form>
+    </div>
   );
 }

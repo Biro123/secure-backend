@@ -1,6 +1,6 @@
 import { createState, useState } from '@hookstate/core';
 
-const themeState = createState('dark');
+const themeState = createState('light');
 
 export function useThemeState() {
     const state = useState(themeState)

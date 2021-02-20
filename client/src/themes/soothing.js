@@ -11,7 +11,7 @@ export const lightSoothingTheme = createMuiTheme({
     },
     background: {
       default: '#fff8e1',
-      paper: '#fff8e1',
+      paper: '#fff',
     },
     text: {
       primary: '#6d4c41',

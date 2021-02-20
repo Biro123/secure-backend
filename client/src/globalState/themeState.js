@@ -1,9 +1,9 @@
 import { createState, useState } from '@hookstate/core';
 
-const themeState = createState({});
+const themeState = createState('dark');
 
 export function useThemeState() {
-    const state = useState('dark')
+    const state = useState(themeState)
 
     return ({
         setTheme(theme) {
@@ -11,6 +11,11 @@ export function useThemeState() {
         },
         get() {
           return state.get()
+        },
+        toggle() {
+          state.set((p) => {
+            return p==='light' ? 'dark' : 'light'
+          } )
         }
     })   
 }

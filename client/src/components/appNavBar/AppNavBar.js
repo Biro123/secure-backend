@@ -9,8 +9,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Button from '@material-ui/core/Button';
 import MenuIcon from "@material-ui/icons/Menu";
 import green from "@material-ui/core/colors/green";
+import Switch from '@material-ui/core/Switch';
 
 import { useUserState } from '../../globalState/userState';
+import { useThemeState } from '../../globalState/themeState';
 
 // react.school/material-ui
 
@@ -35,6 +37,7 @@ export default function AppNavBar() {
   const classes = useStyles();
 
   const userState = useUserState();
+  const themeState = useThemeState();
   // console.log(userState.isLoggedIn);
 
   const button = userState.isAuthenticated ? 
@@ -66,6 +69,11 @@ export default function AppNavBar() {
             Title
           </Typography>
           {button}
+          <Switch
+            // checked={state.checkedA}
+            onChange={themeState.toggle}
+            inputProps={{ 'aria-label': 'secondary checkbox' }}
+          />
         </Toolbar>
       </AppBar>
       <Toolbar />

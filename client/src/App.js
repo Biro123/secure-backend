@@ -9,7 +9,7 @@ import MainPage from './components/content/MainPage';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import AlertMessage from './components/alert/AlertMessage';
-import { userUserState, useUserState } from './globalState/userState';
+import { useUserState } from './globalState/userState';
 import ThemeProvider from './ThemeProvider';
 
 const App = () => {

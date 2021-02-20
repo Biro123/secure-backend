@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useState } from '@hookstate/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
 
   const userState = useUserState();
@@ -46,6 +47,12 @@ export default function SignIn() {
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    if (userState.isAuthenticated) {
+      props.history.push('/');
+    }
+  },[userState.isAuthenticated])
 
   const { email, password } = formData.get();
 
@@ -59,7 +66,7 @@ export default function SignIn() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -111,7 +118,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

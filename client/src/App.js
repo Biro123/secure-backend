@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'fontsource-roboto';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import AppNavBar from './components/appNavBar/AppNavBar';
 import MainPage from './components/content/MainPage';
 import SignIn from './components/auth/SignIn';
@@ -39,6 +40,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
+        <CssBaseline />
         <AppNavBar />
         <AlertMessage />
         <Switch>

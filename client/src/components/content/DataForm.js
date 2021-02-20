@@ -1,7 +1,6 @@
 import { useState } from '@hookstate/core';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -82,7 +81,6 @@ export default function DataForm() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <form className={classes.form} noValidate  onSubmit={(e) => onSubmit(e)}>
           <Grid container spacing={2}>

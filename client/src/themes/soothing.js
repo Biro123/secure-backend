@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core';
 
-export const lightSoothingTheme = createMuiTheme({
+export const lightTheme = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
@@ -24,31 +24,14 @@ export const lightSoothingTheme = createMuiTheme({
   },
 })
 
-export const darkSoothingTheme = createMuiTheme({
+export const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: '#95bdb6',
+      main: '#c54924',
     },
     secondary: {
-      main: '#bfa218',
-    },
-    background: {
-      default: '#542409',
-      paper: '#35211b',
-    },
-  },
-  overrides: {
-    MuiAppBar: {
-      colorInherit: {
-        backgroundColor: '#01352D',
-        color: '#fff',
-      },
-    },
-  },
-  props: {
-    MuiAppBar: {
-      color: 'inherit',
+      main: '#388e3c',
     },
   },
 })

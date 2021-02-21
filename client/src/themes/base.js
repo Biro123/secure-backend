@@ -1,7 +1,7 @@
 import { theme } from '@material-ui/core';
-import { lightSoothingTheme, darkSoothingTheme } from './soothing';
+import { lightTheme, darkTheme } from './soothing';
 
-const themes = [ lightSoothingTheme, darkSoothingTheme ];
+const themes = [ lightTheme, darkTheme ];
 
 export function getThemeByName(themeName) {
   return themes.find((theme) => theme.palette.type === themeName);

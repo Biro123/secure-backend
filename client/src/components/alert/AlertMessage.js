@@ -9,7 +9,7 @@ const AlertMessage = () => {
     alerts !== null &&
     alerts.length > 0 &&
     alerts.map((alert) => (
-      <Alert severity={alert.alertType}>
+      <Alert key={alert.id} severity={alert.alertType}>
         {alert.msg}
       </Alert>
     ))

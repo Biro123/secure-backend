@@ -13,6 +13,7 @@ import Switch from '@material-ui/core/Switch';
 
 import { useUserState } from '../../globalState/userState';
 import { useThemeState } from '../../globalState/themeState';
+import { useSidebarState } from '../../globalState/sidebarState';
 
 // react.school/material-ui
 
@@ -37,6 +38,7 @@ export default function AppNavBar() {
   const classes = useStyles();
 
   const userState = useUserState();
+  const sideBarState = useSidebarState();
   const themeState = useThemeState();
   // console.log(userState.isLoggedIn);
 
@@ -62,6 +64,7 @@ export default function AppNavBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={() => sideBarState.toggle()}
           >
             <MenuIcon />
           </IconButton>

@@ -11,6 +11,8 @@ import SignUp from './components/auth/SignUp';
 import AlertMessage from './components/alert/AlertMessage';
 import { useUserState } from './globalState/userState';
 import ThemeProvider from './ThemeProvider';
+import SideBar from './components/navigation/SideBar';
+import routes from './components/navigation/routes';
 
 const App = () => {
 
@@ -45,11 +47,17 @@ const App = () => {
           <CssBaseline />
           <AppNavBar />
           <AlertMessage />
+          <SideBar />
           <Switch>
-            <Route exact path='/' component={MainPage} />
+            {routes.map((route) => (
+              <Route exact path={route.path} key={route.path}>
+                <route.component />
+              </Route>
+            ))}
+            {/* <Route exact path='/' component={MainPage} />
             <Route exact path='/register' component={SignUp} />
             <Route exact path='/login' component={SignIn} />
-            <Route exact path='/logout' component={() => <p>logout</p>} />
+            <Route exact path='/logout' component={() => <p>logout</p>} /> */}
           </Switch>          
         </ThemeProvider>
         

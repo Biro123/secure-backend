@@ -49,7 +49,8 @@ const App = () => {
           <AlertMessage />
           <SideBar />
           <Switch>
-            {routes().map((route) => (
+            {routes(userState.isAuthenticated).map((route) => (
+              !route.disabled &&
               <Route exact path={route.path} key={route.path}>
                 <route.component />
               </Route>

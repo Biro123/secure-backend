@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { useState } from '@hookstate/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -12,7 +13,6 @@ import Container from '@material-ui/core/Container';
 
 import { useUserState } from '../../globalState/userState';
 import { useAlertState } from '../../globalState/alertState';
-// import { register } from '../../actions/auth';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp(props) {
+const SignUp = (props) => {
   const classes = useStyles();
 
   const userState = useUserState();
@@ -155,3 +155,4 @@ export default function SignUp(props) {
     </Container>
   );
 }
+export default withRouter(SignUp);

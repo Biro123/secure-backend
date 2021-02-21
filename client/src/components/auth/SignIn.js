@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { useState } from '@hookstate/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -11,7 +12,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { useUserState } from '../../globalState/userState';
-import { useAlertState } from '../../globalState/alertState';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,11 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props) {
+const SignIn = (props) => {
   const classes = useStyles();
-
   const userState = useUserState();
-  const alertState = useAlertState();
 
   const formData = useState({
     email: '',
@@ -123,3 +121,4 @@ export default function SignIn(props) {
     </Container>
   );
 }
+export default withRouter(SignIn);

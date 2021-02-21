@@ -6,38 +6,39 @@ import HomeIcon from '@material-ui/icons/HomeRounded';
 import MainPage from '../content/MainPage';
 import SignIn from '../auth/SignIn';
 import SignUp from '../auth/SignUp';
+import SignOut from '../auth/SignOut';
 
-const SignOut = () => {
-  return (
-    <p>Sign Out</p>
-  )
+const routes = (isAuthenticated) => {
+  return  [
+    {
+      path: '/',
+      sidebarName: 'Home',
+      disabled: false,
+      icon: HomeIcon,
+      component: MainPage
+    },
+    {
+      path: '/register',
+      sidebarName: 'Sign Up',
+      disabled: isAuthenticated,
+      icon: AccountBoxIcon,
+      component: SignUp
+    },
+    {
+      path: '/login',
+      sidebarName: 'Sign In',
+      disabled: isAuthenticated,
+      icon: LockOutlinedIcon,
+      component: SignIn
+    },
+    {
+      path: '/logout',
+      sidebarName: 'Sign Out',
+      disabled: !isAuthenticated,
+      icon: LockOutlinedIcon,
+      component: SignOut
+    },
+  ];
 }
-
-const routes = [
-  {
-    path: '/',
-    sidebarName: 'Home',
-    icon: HomeIcon,
-    component: MainPage
-  },
-  {
-    path: '/register',
-    sidebarName: 'Sign Up',
-    icon: AccountBoxIcon,
-    component: SignUp
-  },
-  {
-    path: '/login',
-    sidebarName: 'Sign In',
-    icon: LockOutlinedIcon,
-    component: SignIn
-  },
-  {
-    path: '/logout',
-    sidebarName: 'Sign Out',
-    icon: LockOutlinedIcon,
-    component: SignOut
-  },
-];
 
 export default routes;

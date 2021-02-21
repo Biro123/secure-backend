@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import routes from './routes';
 import { useSidebarState } from '../../globalState/sidebarState';
+import { useUserState } from '../../globalState/userState';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,7 +16,7 @@ import {
   ListItemText,
   Grid
  } from '@material-ui/core';
-
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -37,14 +38,17 @@ const useStyles = makeStyles((theme) => ({
 const SideBar = (props) => {
   const classes = useStyles();
   const isOpen = useSidebarState();
+  const userState = useUserState();
 
   const activeRoute = (routeName) => {
     return props.location.pathname === routeName ? true : false;
   }
 
-  let menuItems = routes.map((menuItem, index) => {
+  const routeList = routes(userState.isAuthenticated);
+
+  const menuItems = routeList.map((menuItem, index) => {
     return (
-      <ListItem button key={index + 1}
+      <ListItem button key={index} disabled={menuItem.disabled}
         onClick={() => props.history.push(menuItem.path)}>
         <MenuItem selected={activeRoute(menuItem.path)}>
           <ListItemIcon>

@@ -17,7 +17,7 @@ import routes from './components/navigation/routes';
 const App = () => {
 
   const userState = useUserState();
-  console.log(userState.token);
+  // console.log(userState.token);
 
   //Base URL for every request
   // axios.defaults.baseURL = "https://codespot.org";
@@ -49,7 +49,7 @@ const App = () => {
           <AlertMessage />
           <SideBar />
           <Switch>
-            {routes.map((route) => (
+            {routes().map((route) => (
               <Route exact path={route.path} key={route.path}>
                 <route.component />
               </Route>

@@ -2,6 +2,7 @@ import { useState } from '@hookstate/core';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useUserState } from '../../globalState/userState';
@@ -76,6 +77,14 @@ export default function DataForm() {
       postData(formData.get());
     }
   };
+
+  if (!userState.isAuthenticated) {
+    return (
+      <Typography variant='body1' color='secondary'>
+          Log in to add items
+      </Typography>
+    )    
+  }
 
   return (
     <div className={classes.paper}>

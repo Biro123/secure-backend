@@ -42,18 +42,18 @@ export default function AppNavBar() {
   const themeState = useThemeState();
   // console.log(userState.isLoggedIn);
 
-  const button = userState.isAuthenticated ? 
-  (
-    <Button variant="contained" color="secondary" onClick={() => userState.signOut()}>
-      Sign Out
-    </Button>
-  ) : (
-    <Button variant="contained" color="secondary" 
-      component={RouterLink}
-      to='/login'>
-      Sign In
-    </Button>
-  )
+  // const button = userState.isAuthenticated ? 
+  // (
+  //   <Button variant="contained" color="secondary" onClick={() => userState.signOut()}>
+  //     Sign Out
+  //   </Button>
+  // ) : (
+  //   <Button variant="contained" color="secondary" 
+  //     component={RouterLink}
+  //     to='/login'>
+  //     Sign In
+  //   </Button>
+  // )
 
   return (
     <Fragment>
@@ -71,7 +71,7 @@ export default function AppNavBar() {
           <Typography variant="h6" className={classes.title}>
             Title
           </Typography>
-          {button}
+          {/* {button} */}
           <Switch
             // checked={state.checkedA}
             onChange={themeState.toggle}

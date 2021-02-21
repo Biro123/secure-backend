@@ -1,4 +1,3 @@
-import { theme } from '@material-ui/core';
 import { lightTheme, darkTheme } from './soothing';
 
 const themes = [ lightTheme, darkTheme ];

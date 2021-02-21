@@ -55,9 +55,9 @@ export default function DataForm() {
     } catch (err) {
       const errors = err.response.data.errors;      
       if (errors) {
-        errors.forEach(error => alertState.setAlert(error.msg, 'danger'));
+        errors.forEach(error => alertState.setAlert(error.msg, 'error'));
       } else {
-        alertState.setAlert(err.response.statusText, 'danger');
+        alertState.setAlert(err.response.statusText, 'error');
         formData.text.set('');
       }
     }
@@ -71,7 +71,7 @@ export default function DataForm() {
   const onSubmit = async (e) => {
     e.preventDefault();    
     if (text === '') {
-      alertState.setAlert('Please enter some text', 'danger');
+      alertState.setAlert('Please enter some text', 'error');
     } else {
       postData(formData.get());
     }

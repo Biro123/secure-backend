@@ -1,12 +1,14 @@
 import { createState, useState } from '@hookstate/core';
 
-const themeState = createState('light');
+const startTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light';
+const themeState = createState(startTheme);
 
 export function useThemeState() {
     const state = useState(themeState)
 
     return ({
         setTheme(theme) {
+          localStorage.setItem('theme', theme);
           state.set(theme);
         },
         get() {
@@ -14,7 +16,9 @@ export function useThemeState() {
         },
         toggle() {
           state.set((p) => {
-            return p==='light' ? 'dark' : 'light'
+            const newTheme = (p==='light' ? 'dark' : 'light');
+            localStorage.setItem('theme', newTheme);
+            return newTheme;
           } )
         }
     })   

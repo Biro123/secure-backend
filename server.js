@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const connectDB = require('./config/db');
 const path = require('path');
 
@@ -9,8 +10,6 @@ connectDB();
 
 // Init Middlewre
 app.use(express.json({ extended: false }));
-
-// app.get('/', (req, res) => res.send('API Running'));
 
 // Define routes
 app.use('/api/users', require('./routes/api/users'));

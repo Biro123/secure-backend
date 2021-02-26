@@ -9,8 +9,21 @@ const app = express();
 // Connect to database
 connectDB();
 
+// define security policy
+const helmetConfig = {
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://bris-basic-mern.herokuapp.com/"],
+      styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
+      imgSrc: ["'self'", 'https://*.com'],
+      fontSrc: ["'self'", 'https://*.com', 'data:']
+    },
+  }
+};
+
 // Init Middlewre
-app.use(helmet());  // security improvements
+app.use(helmet(helmetConfig));  // security improvements
 app.use(express.json({ extended: false }));
 
 // Define routes

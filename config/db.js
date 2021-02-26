@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const db = process.env.MONGO_URI;
 
 const connectDB = async () => {
-  console.log('DEBUG: ' + db.substring(1,15));
+  // console.log('DEBUG: ' + db.substring(1,15));
   try {
     await mongoose.connect(db, {
       useNewUrlParser: true,

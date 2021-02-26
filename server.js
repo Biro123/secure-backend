@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const helmet = require('helmet');
 const connectDB = require('./config/db');
 const path = require('path');
 
@@ -9,6 +10,7 @@ const app = express();
 connectDB();
 
 // Init Middlewre
+app.use(helmet());  // security improvements
 app.use(express.json({ extended: false }));
 
 // Define routes

@@ -9,14 +9,12 @@ const app = express();
 // Connect to database
 connectDB();
 
-console.log('debug1 ' + process.env.HEROKU_APP_NAME);
-console.log(process.env.HEROKU_PARENT_APP_NAME);
 // define security policy
 const helmetConfig = {
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://bris-basic-mern.herokuapp.com/"],
+      scriptSrc: ["'self'", "'unsafe-inline'", process.env.APP_URL],
       styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
       imgSrc: ["'self'", 'https://*.com'],
       fontSrc: ["'self'", 'https://*.com', 'data:']

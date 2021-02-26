@@ -9,6 +9,8 @@ const app = express();
 // Connect to database
 connectDB();
 
+console.log('debug1 ' + process.env.HEROKU_APP_NAME);
+console.log(process.env.HEROKU_PARENT_APP_NAME);
 // define security policy
 const helmetConfig = {
   contentSecurityPolicy: {

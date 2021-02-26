@@ -12,6 +12,14 @@
   },
   "author": "Brian Robson",
   "license": "ISC",
+  "env": {
+    "HEROKU_APP_NAME": {
+        "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+        "required": true
+    }
+  },
   "dependencies": {
     "@material-ui/lab": "^4.0.0-alpha.57",
     "bcryptjs": "^2.4.3",

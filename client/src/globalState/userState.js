@@ -65,7 +65,7 @@ export function useUserState() {
             state.isAuthenticated.set(true);
             state.isLoading.set(false);   
           } catch (err) {
-            console.log(err);
+            // console.log(err.response.headers);
             const errors = err.response.data.errors;
             if (errors) {
               errors.forEach(error => alertState.setAlert(error.msg, 'error'));

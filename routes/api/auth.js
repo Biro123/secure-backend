@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
+const loginRateLimiter = require('../../middleware/rateLimiter');
 
 // @route    GET api/auth
 // @desc     Get user by token
@@ -25,6 +26,7 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
+    loginRateLimiter,
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Password is required').exists()
   ],
